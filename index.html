@@ -38,10 +38,10 @@
 
             var resultado = document.querySelector('div.contando')
 
-            if (ultimoNumero < primeiroNumero) {
-                resultado.innerHTML = "<p class=textoErro>[ERRO] O último número não pode ser menor do que o primeiro.</p> <p class=textoRecomecar>Atualize a página e tente novamente.</p>"
+            if (ultimoNumero < primeiroNumero || intervaloNumero == 0) {
+                resultado.innerHTML = "<p class=textoErro>[ERRO] Verifique se o segundo número que você digitou é maior do que o primeiro e se o campo 'digite o intervalo' foi preenchido.</p> <p class=textoRecomecar>Atualize a página e tente novamente.</p>"
             } else {
-                resultado.innerHTML = `<p>Contando: ${primeiroNumero}, ${ultimoNumero}</p>` 
+                resultado.innerHTML = `<p>Contando: ${primeiroNumero} &#x1F340 ${ultimoNumero}</p>` 
             }   
         }
 
