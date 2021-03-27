@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <header>
+        <h1>Vamos contar</h1>
+    </header>
+
+    <section>
+        <div class="recebeInformacoes">
+            <p><input type="number" placeholder="digite o primeiro número" class=numeroUm></p>
+            <p><input type=number placeholder="digite o último número" class=numeroDois></p>
+            <p><input type="number" placeholder="digite o intervalo" class=numeroTres> </p>
+            <button onclick=processar()>Contar</button>
+        </div>
+        <div class=contando>
+            <p>Contando:</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy;LorenaLobo</p>
+    </footer>
+
+    <script>
+        function processar() {
+            var primeiroNumero = Number(document.querySelector('input.numeroUm').value)
+            var ultimoNumero = Number(document.querySelector('input.numeroDois').value)
+            var intervaloNumero = Number(document.querySelector('input.numeroTres').value)
+
+            var resultado = document.querySelector('div.contando')
+
+            if (ultimoNumero < primeiroNumero) {
+                resultado.innerHTML = "<p class=textoErro>[ERRO] O último número não pode ser menor do que o primeiro.</p> <p class=textoRecomecar>Atualize a página e tente novamente.</p>"
+            } else {
+                resultado.innerHTML = `<p>Contando: ${primeiroNumero}, ${ultimoNumero}</p>` 
+            }   
+        }
+
+    </script>
+</body>
+</html>

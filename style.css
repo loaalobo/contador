@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+
+body {
+    font: normal 16pt Tahoma;
+    text-align: center;
+    background-color: rgb(108, 204, 248);
+    color: rgb(34, 34, 34);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+header, footer {
+    color: white;
+    font-family: 'Indie Flower', cursive;
+    font-size: 20pt;
+}
+
+section {
+    background-color: white;
+    width: 500px;
+    border: 1px solid gray;
+    box-shadow: 1px 1px 10px white;
+    padding: 20px;
+}
+
+.primeiroNumero, .ultimoNumero, .intervaloNumero {
+    width: 150px;
+}
+
+.textoErro {
+    font-size: 10pt;
+    font-weight: bolder;
+    color: red;
+}
+
+.textoRecomecar {
+    font-size: 11pt;
+    color: rgba(34, 34, 34, 0.829);
+}
+
