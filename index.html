@@ -1,49 +1,89 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <link rel="stylesheet" href="style.css">
-
+<!DOCTYPE html> <!--aciona o "full standards mode"-->
+<html lang="pt-br"> <!--define a língua-->
+<head> <!--agrupa as meta tags-->
+    <meta charset="UTF-8"> <!--define o conjunto de caracteres que serão utilizados; para o português do Brasil, o mais compatível é o UTF-8-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!--força o navegador renderizar com a versão mais recente do IE; a partir do IE11 esta meta-tag é considerada obsoleta, mas não é necessário remove-la, não irá afetar o comportamento em navegadores que não usam mais ela-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--define que a página será exibida em uma escala de 100%, ou seja, tela inteira-->
+    <title>Exercício Contador</title> <!--define o nome do documento no topo da página/ barra da aba-->
+    <link rel="stylesheet" href="style.css"> <!--link para estilo externo-->
 </head>
-<body>
-    <header>
+
+<body> <!--delimita o início do corpo do site/ conteúdo que será exibido na página web-->
+    <header> <!--define o cabeçalho da página-->
         <h1>Vamos contar</h1>
     </header>
 
-    <section>
-        <div class="recebeInformacoes">
-            <p><input type="number" placeholder="digite o primeiro número" class=numeroUm></p>
-            <p><input type=number placeholder="digite o último número" class=numeroDois></p>
-            <p><input type="number" placeholder="digite o intervalo" class=numeroTres> </p>
-            <button onclick=processar()>Contar</button>
+    <section> <!--define uma seção da página com 3 div's-->
+        <div class="introducaoJogo">
+            <p>Regras do jogo:</p>
+            <p class="regrasJogo">1. Todos os campos devem ser preenchidos; <br/>2. O intervalo não pode ser zero;</p>
         </div>
+
+        <div class="recebeInformacoes"> 
+            <p>Preencha os campos:<br>
+            <input type="number" placeholder="digite o primeiro número da contagem" class=numeroUm><br>
+            <input type=number placeholder="digite o último número da contagem" class=numeroDois><br>
+            <input type="number" placeholder="digite um intervalo" class=intervalo><br>
+            <button onclick=contar()>Contar</button></p>
+        </div>
+
         <div class=contando>
-            <p>Contando:</p>
+            <p>...</p>
+        </div>
+
+        <div class="reiniciarJogo">
+            <P><button onclick=reiniciar()>Reiniciar jogo</button></P>
         </div>
     </section>
 
-    <footer>
-        <p>&copy;LorenaLobo</p>
+    <footer> <!--define o rodapé da página-->
+        <p><a href="https://github.com/loaalobo?tab=repositories" target="_blank" rel="external" title="clique aqui para acessar o meu github" class=link>&copy;LorenaLobo</a></p>
     </footer>
 
     <script>
-        function processar() {
-            var primeiroNumero = Number(document.querySelector('input.numeroUm').value)
-            var ultimoNumero = Number(document.querySelector('input.numeroDois').value)
-            var intervaloNumero = Number(document.querySelector('input.numeroTres').value)
+        function contar() { //busca as informações/dados fornecidas pelo usuário no HTML 
+            var primeiroNumero = document.querySelector('input.numeroUm').value //dados do 1º input
+            var ultimoNumero = document.querySelector('input.numeroDois').value //dados do 2º input
+            var intervaloNumero = document.querySelector('input.intervalo').value //dados do 3º input
+            var contando = document.querySelector('div.contando') //dados do espaço destinado à exibição do resultado
+        
+            //estrutura condicional composta para testar se o value de algum dos inputs está com o comprimento(length) de zero, ou seja, sem informações/dados digitados pelo usuário. Se tiver, ou seja, se a condição for atendida, mostra a mensagem de erro
+            if (primeiroNumero.length == 0 || ultimoNumero.length == 0 || intervaloNumero.length == 0){
+                contando.innerHTML = "<p class=textoErro>[ERRO] Revise as regras do jogo!</p>"
+            } else { //senão, escreve no espaço do resultado (que antes só tinha "...") a mensagem "Contando:". Em sequência, declara 3 variáveis para receber as informações dos 3 inputs que já coletamos na primeira parte da função (mas agora convertendo o 'value' em número inteiro com o 'parseInt'). Depois, faz outra estrutura condicional simples (if) para saber se o intervalo/passo (3º número digitado) é igual ao número 0. Se for, dispara um alerta dizendo que vai considerar o intervalo/passo = 1 (já que é impossível contar de 0 em 0). Depois de testar essas condições de "jogabilidade" (se tem algum campo vazio ou se o campo número 3 = 0), cria outra estrutura condicional composta (if else), dessa vez para testar se a contagem será em ordem crescente (se o 1º número > 2º número) ou decrescente (se o 1º número < 2º número). Sendo condição composta, se atendida, executa uma determinada estrutura de repetição ('for' início-teste-incremento); se não atendida, executa outra. Em ambos os casos, se as condições de "jogabilidade" forem atendidas, mostra a mensagem 'FIM' depois de exibir a contagem
+                contando.innerHTML = "<p class=textoAcerto>Contando: </p>" 
+                var inicio = parseInt(primeiroNumero) 
+                var fim = parseInt(ultimoNumero)
+                var passo = parseInt(intervaloNumero)
 
-            var resultado = document.querySelector('div.contando')
+                if (passo <= 0) {
+                    alert("[OPS] Intervalo inválido: vamos considerar passo = 1")
+                    passo = 1
+                }
+                
+                //criamos uma variável para ser o nosso contador e a chamamos de "c"
+                if (inicio < fim) { //contagem crescente
+                    for(var c = inicio; c <= fim; c += passo){ 
+                        contando.innerHTML += `${c} &#x1F340 ` 
+                    }    
+                } else { //contagem decrescente
+                    for(var c = inicio; c >= fim; c -= passo){
+                        contando.innerHTML += `${c} &#x1F340 `
+                    }
+                }
+                contando.innerHTML += "FIM"  
+            }
+        }   
 
-            if (ultimoNumero < primeiroNumero || intervaloNumero == 0) {
-                resultado.innerHTML = "<p class=textoErro>[ERRO] Verifique se o segundo número que você digitou é maior do que o primeiro e se o campo 'digite o intervalo' foi preenchido.</p> <p class=textoRecomecar>Atualize a página e tente novamente.</p>"
-            } else {
-                resultado.innerHTML = `<p>Contando: ${primeiroNumero} &#x1F340 ${ultimoNumero}</p>` 
-            }   
+        function reiniciar(){ //função responsável por esvaziar os campos/input para que o usuário possa jogar novamente e mostrar uma mensagem com orientações para nova partida
+            var primeiroNumero = document.querySelector('input.numeroUm').value=''
+            var ultimoNumero = document.querySelector('input.numeroDois').value=''
+            var intervaloNumero = document.querySelector('input.intervalo').value=''
+            var contando = document.querySelector('div.contando')
+
+            contando.innerHTML = "<p class=textoJogarNovamente>Preencha novamente os campos e jogue mais uma vez! &#x1F308</p>" 
         }
+
 
     </script>
 </body>

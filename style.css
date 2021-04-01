@@ -3,7 +3,8 @@
 body {
     font: normal 16pt Tahoma;
     text-align: center;
-    background-color: rgb(108, 204, 248);
+    /*background-color: rgb(108, 204, 248);*/
+    background-image: url("https://images.pexels.com/photos/209224/pexels-photo-209224.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
     color: rgb(34, 34, 34);
     height: 100vh;
     display: flex;
@@ -13,9 +14,9 @@ body {
 }
 
 header, footer {
-    color: white;
+    color: black;
     font-family: 'Indie Flower', cursive;
-    font-size: 20pt;
+    font-size: 22pt;
 }
 
 section {
@@ -23,11 +24,15 @@ section {
     width: 500px;
     border: 1px solid gray;
     box-shadow: 1px 1px 10px white;
-    padding: 20px;
+    padding: 15px;
 }
 
-.primeiroNumero, .ultimoNumero, .intervaloNumero {
-    width: 150px;
+.regrasJogo {
+    font-size: 10pt;
+}
+
+.numeroUm, .numeroDois, .intervalo{
+    width: 230px;
 }
 
 .textoErro {
@@ -36,8 +41,14 @@ section {
     color: red;
 }
 
-.textoRecomecar {
+.textoAcerto, .textoJogarNovamente {
     font-size: 11pt;
     color: rgba(34, 34, 34, 0.829);
+}
+
+.link {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.741);
+    font-weight: bolder;
 }
 
