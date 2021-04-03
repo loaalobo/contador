@@ -13,18 +13,18 @@
         <h1>Vamos contar</h1>
     </header>
 
-    <section> <!--define uma seção da página com 3 div's-->
+    <section id="box"> <!--define uma seção da página com 3 div's-->
         <div class="introducaoJogo">
             <p>Regras do jogo:</p>
             <p class="regrasJogo">1. Todos os campos devem ser preenchidos; <br/>2. O intervalo não pode ser zero;</p>
         </div>
 
         <div class="recebeInformacoes"> 
-            <p>Preencha os campos:<br>
+            <p>
             <input type="number" placeholder="digite o primeiro número da contagem" class=numeroUm><br>
             <input type=number placeholder="digite o último número da contagem" class=numeroDois><br>
             <input type="number" placeholder="digite um intervalo" class=intervalo><br>
-            <button onclick=contar()>Contar</button></p>
+            <button onclick=contar() id="btnContar">Contar</button></p>
         </div>
 
         <div class=contando>
@@ -32,13 +32,14 @@
         </div>
 
         <div class="reiniciarJogo">
-            <P><button onclick=reiniciar()>Reiniciar jogo</button></P>
+            <P><button onclick=reiniciar() id="btnReiniciarJogo">Reiniciar jogo</button></P>
         </div>
     </section>
 
     <footer> <!--define o rodapé da página-->
         <p><a href="https://github.com/loaalobo?tab=repositories" target="_blank" rel="external" title="clique aqui para acessar o meu github" class=link>&copy;LorenaLobo</a></p>
     </footer>
+    <audio src="audio/Say Yeah! - Jeremy Korpas.mp3" autoplay loop controls></audio>
 
     <script>
         function contar() { //busca as informações/dados fornecidas pelo usuário no HTML 
@@ -49,9 +50,9 @@
         
             //estrutura condicional composta para testar se o value de algum dos inputs está com o comprimento(length) de zero, ou seja, sem informações/dados digitados pelo usuário. Se tiver, ou seja, se a condição for atendida, mostra a mensagem de erro
             if (primeiroNumero.length == 0 || ultimoNumero.length == 0 || intervaloNumero.length == 0){
-                contando.innerHTML = "<p class=textoErro>[ERRO] Revise as regras do jogo!</p>"
+                contando.innerHTML = "<p class=textoErro>[ERRO] Impossível contar! <br> Revise as regras do jogo!</p>"
             } else { //senão, escreve no espaço do resultado (que antes só tinha "...") a mensagem "Contando:". Em sequência, declara 3 variáveis para receber as informações dos 3 inputs que já coletamos na primeira parte da função (mas agora convertendo o 'value' em número inteiro com o 'parseInt'). Depois, faz outra estrutura condicional simples (if) para saber se o intervalo/passo (3º número digitado) é igual ao número 0. Se for, dispara um alerta dizendo que vai considerar o intervalo/passo = 1 (já que é impossível contar de 0 em 0). Depois de testar essas condições de "jogabilidade" (se tem algum campo vazio ou se o campo número 3 = 0), cria outra estrutura condicional composta (if else), dessa vez para testar se a contagem será em ordem crescente (se o 1º número > 2º número) ou decrescente (se o 1º número < 2º número). Sendo condição composta, se atendida, executa uma determinada estrutura de repetição ('for' início-teste-incremento); se não atendida, executa outra. Em ambos os casos, se as condições de "jogabilidade" forem atendidas, mostra a mensagem 'FIM' depois de exibir a contagem
-                contando.innerHTML = "<p class=textoAcerto>Contando: </p>" 
+                contando.innerHTML = "<p class=textoAcerto>Contando:</p>" 
                 var inicio = parseInt(primeiroNumero) 
                 var fim = parseInt(ultimoNumero)
                 var passo = parseInt(intervaloNumero)
@@ -73,6 +74,9 @@
                 }
                 contando.innerHTML += "FIM"  
             }
+            document.getElementById('btnContar').disabled = true
+            document.getElementById('box').style.backgroundColor = 'rgba(255, 255, 255, 0.549)';
+            
         }   
 
         function reiniciar(){ //função responsável por esvaziar os campos/input para que o usuário possa jogar novamente e mostrar uma mensagem com orientações para nova partida
@@ -81,7 +85,10 @@
             var intervaloNumero = document.querySelector('input.intervalo').value=''
             var contando = document.querySelector('div.contando')
 
-            contando.innerHTML = "<p class=textoJogarNovamente>Preencha novamente os campos e jogue mais uma vez! &#x1F308</p>" 
+            contando.innerHTML = "<p class=textoJogarNovamente>Preencha os campos e jogue novamente! &#x1F308</p>" 
+
+            document.getElementById('btnContar').disabled = false
+            document.getElementById('box').style.backgroundColor = 'white';
         }
 
 
